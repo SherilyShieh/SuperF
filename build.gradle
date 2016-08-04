@@ -1,15 +1,17 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
+apply from: 'dependencies.gradle'
 buildscript {
     repositories {
         jcenter()
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.1.2'
-
         //注解配置,android-apt, 提供dagger2使用编译生成类的功能.
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-
         //aspectj:自定义注解
         classpath 'org.aspectj:aspectjtools:1.8.7'
         // NOTE: Do not place your application dependencies here; they belong
@@ -18,8 +20,22 @@ buildscript {
 }
 
 allprojects {
+    ext {
+        //android config
+        compileSdkVersion = 23
+        buildToolsVersion = "23.0.3"
+        applicationId = "com.sherilycoco.shieh.superf"
+        minSdkVersion = 16
+        targetSdkVersion = 23
+        versionCode = 1
+        versionName = "1.0.0"
+    }
     repositories {
         jcenter()
+        mavenCentral()
+        maven{
+            url  "http://mvn.gt.igexin.com/nexus/content/repositories/releases/"
+        }
     }
 }
 

@@ -2,16 +2,27 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
-
+    compileSdkVersion parent.ext.compileSdkVersion
+    buildToolsVersion parent.ext.buildToolsVersion
+    lintOptions {
+        abortOnError false //Gradle编译禁用Lint报错
+        disable "MissingPrefix"
+        disable 'MissingTranslation'
+    }
 
     defaultConfig {
-        applicationId "com.sherilycoco.shieh.superf"
-        minSdkVersion 16
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        applicationId parent.ext.applicationId
+        minSdkVersion parent.ext.minSdkVersion
+        targetSdkVersion parent.ext.targetSdkVersion
+        versionCode parent.ext.versionCode
+        versionName parent.ext.versionName
+        multiDexEnabled true
+        manifestPlaceholders = [
+                GETUI_APP_ID      : "MWJAEWMBjhAufC66FvZXQ7",
+                GETUI_APP_KEY     : "6NsRGFg6Ya5S43pw3bQPq4",
+                GETUI_APP_SECRET  : "eNyEE4vx3D7uryIAF5MD09",
+                PACKAGE_NAME      : applicationId,
+        ]
     }
     buildTypes {
         release {
@@ -22,32 +33,49 @@ android {
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
+    dexOptions {
+        javaMaxHeapSize "4g"
+        preDexLibraries = false
+    }
+}
+
+task deleteUnalignedFiles(type: Delete) {
+    delete fileTree('./build/outputs/apk') {
+        include '*unaligned.apk'
+    }
 }
 
 dependencies {
+    def dependence = rootProject.ext.dependencies
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    //recyclerview, 提供RecyclerView控件的功能.
-    compile 'com.android.support:recyclerview-v7:23.1.1'
-    //butterknife, 提供xml至java的id映射的功能.
-    compile 'com.jakewharton:butterknife:7.0.1'
-    //retrofit, 提供网络请求的支持的功能.
-    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
-    compile 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'
-    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
-    //rx, 提供rxandroid和rxjava支持的功能.
-    compile 'io.reactivex:rxandroid:1.1.0'
-    compile 'io.reactivex:rxjava:1.1.0'
-    //EventBus
-    compile "org.greenrobot:eventbus:3.0.0"
-    //dagger2, 提供dagger2支持的功能.
-    compile 'com.google.dagger:dagger:2.0.2'
-    compile 'com.google.dagger:dagger-compiler:2.0.2'
-    //swipelayout,提供下拉刷新功能
-    compile 'com.daimajia.swipelayout:library:1.2.0@aar'
-    //annotation, 提供java注释解析的功能.
-    provided 'org.glassfish:javax.annotation:10.0-b28'
-    //aspectj,自定义注解
-    provided 'org.aspectj:aspectjrt:1.8.7'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile dependence.androidSupportMultidex
+    compile dependence.androidSupportV7
+    compile dependence.androidSupportDesign
+    compile dependence.androidSupportPercent
+    compile dependence.slidingUpPanel
+    compile dependence.butterKnife
+    compile dependence.dagger
+    apt dependence.daggerCompiler
+    provided dependence.javaxAnnotation
+    compile dependence.rxJava
+    compile dependence.rxAndroid
+    compile dependence.swipeLayout
+    compile dependence.umengAnalytics
+    compile dependence.getuiSDK
+    compile dependence.getuiExt
+    compile dependence.glide
+    compile dependence.glideTransformation
+    compile dependence.eventBus
+    compile dependence.roundImageView
+    compile dependence.bgaQrcodecore
+    compile dependence.bgaZxing
+    testCompile rootProject.ext.testDependencies.junit
+    testCompile rootProject.ext.testDependencies.robolectric
+    compile project(':domain')
+    //    compile project(':data')
+    releaseCompile project(path: ':data', configuration: 'release')
+    debugCompile project(path: ':data', configuration: 'debug')
+    compile project(':common')
+//    compile 'com.android.support:support-v4:23.4.0'
 }
