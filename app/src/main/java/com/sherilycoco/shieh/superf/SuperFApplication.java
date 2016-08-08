@@ -18,7 +18,9 @@ public class SuperFApplication extends Application{
     }
 
     public void initializeInjector(){
-        applicationComponent = DaggerApplicationComponent.builder().applicationMoudle(new ApplicationMoudle(this)).build();
+        applicationComponent = DaggerApplicationComponent.builder()
+                .applicationMoudle(new ApplicationMoudle(this))
+                .build();
     }
 
     @Override

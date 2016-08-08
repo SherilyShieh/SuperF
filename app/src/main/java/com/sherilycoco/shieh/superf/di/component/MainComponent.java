@@ -16,7 +16,7 @@ import dagger.Component;
  */
 @ActivityScope
 @Component(dependencies = ApplicationComponent.class, modules = {ActivityMoudle.class})
-public interface MainComponent {
+public interface MainComponent extends ActicityComponent {
     void inject(KeepAccountFragment keepAccountFragment);
     void inject(MessageFragment messageFragment);
     void inject(HistoryFragment historyFragment);

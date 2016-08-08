@@ -1,6 +1,7 @@
 package com.sherilycoco.shieh.superf.di.component;
 
 import android.app.Activity;
+import android.content.pm.ProviderInfo;
 
 import com.sherilycoco.shieh.superf.di.moudle.ActivityMoudle;
 import com.sherilycoco.shieh.superf.di.scope.ActivityScope;
@@ -13,5 +14,6 @@ import dagger.Component;
 @ActivityScope
 @Component(dependencies = ApplicationComponent.class, modules = ActivityMoudle.class)
 public interface ActicityComponent {
+
     Activity activity();
 }

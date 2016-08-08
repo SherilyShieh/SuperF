@@ -26,6 +26,7 @@ import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements HasComponent<MainComponent> {
 
+
     @Bind(R.id.fragment_fl)
     FrameLayout fragmentFl;
     @Bind(R.id.jizhang_imageview)
@@ -59,7 +60,6 @@ public class MainActivity extends BaseActivity implements HasComponent<MainCompo
     private MessageFragment messageFragment;
     private HistoryFragment historyFragment;
     private PersonalCenterFrament personalCenterFrament;
-    private int positions = 0;
 
 
     @Override
@@ -69,8 +69,9 @@ public class MainActivity extends BaseActivity implements HasComponent<MainCompo
         ButterKnife.bind(this);
         initSelected();
         setSelected(0);
-//        keepAccountFragment = (KeepAccountFragment)getFragmentManager().findFragmentById(R.id.fragment_fl);
+//        keepAccountFragment = (KeepAccountFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
         keepAccountFragment = new KeepAccountFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_fl,keepAccountFragment).commit();
         messageFragment = new MessageFragment();
         historyFragment = new HistoryFragment();
         personalCenterFrament = new PersonalCenterFrament();
@@ -141,7 +142,7 @@ public class MainActivity extends BaseActivity implements HasComponent<MainCompo
     @Override
     protected void initializeInjector() {
         super.initializeInjector();
-        mainComponent = DaggerMainComponent.builder().activityMoudle(new ActivityMoudle(this)).build();
+        mainComponent = DaggerMainComponent.builder().applicationComponent(getApplicationComponent()).activityMoudle(new ActivityMoudle(this)).build();
     }
 
     @Override
