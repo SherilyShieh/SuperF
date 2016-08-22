@@ -9,10 +9,13 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 
 import com.sherilycoco.shieh.superf.R;
+import com.sherilycoco.shieh.superf.mvp.model.TeamSummary;
+import com.sherilycoco.shieh.superf.ui.Adapter.PopuWindowAdapter;
 
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
@@ -25,12 +28,11 @@ public class ListPopWindow extends PopupWindow {
     @Bind(R.id.check_myteam)
     Button checkMyteam;
     private Context context;
-    private List<Object> datas;
+    private View rootView;
 
     public ListPopWindow(Context context, int width) {
         super(width, WRAP_CONTENT);
         this.context = context;
-        initView();
     }
 
     public interface getMyAllTeamDetialListener {
@@ -42,11 +44,13 @@ public class ListPopWindow extends PopupWindow {
         this.listener = listener;
     }
 
-    private void initView() {
+    public void initView(List<TeamSummary> list) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View rootView = inflater.inflate(R.layout.popwindow, null);
+        rootView = inflater.inflate(R.layout.popwindow, null);
+        ButterKnife.bind(this, rootView);
         listview.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        listview.setAdapter(new PopuWindowAdapter(list,context));
         listview.setLayoutManager(layoutManager);
         setContentView(rootView);
         checkMyteam.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +64,7 @@ public class ListPopWindow extends PopupWindow {
 
     public void setAdapter(RecyclerView.Adapter adapter) {
         listview.setAdapter(adapter);
+
     }
 
 }
