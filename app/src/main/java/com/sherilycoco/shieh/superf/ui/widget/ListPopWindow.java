@@ -29,6 +29,7 @@ public class ListPopWindow extends PopupWindow {
     Button checkMyteam;
     private Context context;
     private View rootView;
+    private PopuWindowAdapter adapter;
 
     public ListPopWindow(Context context, int width) {
         super(width, WRAP_CONTENT);
@@ -44,27 +45,48 @@ public class ListPopWindow extends PopupWindow {
         this.listener = listener;
     }
 
+    public interface OnAccountClickListener{
+        void acount(TeamSummary teamSummary);
+    }
+    private OnAccountClickListener onAccountClickListener;
+
+    public void setOnAccountClickListener(OnAccountClickListener onAccountClickListener) {
+        this.onAccountClickListener = onAccountClickListener;
+    }
+
     public void initView(List<TeamSummary> list) {
         LayoutInflater inflater = LayoutInflater.from(context);
         rootView = inflater.inflate(R.layout.popwindow, null);
         ButterKnife.bind(this, rootView);
         listview.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
-        listview.setAdapter(new PopuWindowAdapter(list,context));
+        adapter = new PopuWindowAdapter(list,context);
+        listview.setAdapter(adapter);
         listview.setLayoutManager(layoutManager);
         setContentView(rootView);
-        checkMyteam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.check();
-            }
-        });
+        if (listener != null){
+            checkMyteam.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.check();
+                }
+            });
+        }
+        if (onAccountClickListener != null){
+            adapter.setOnChangeTeamListener(new PopuWindowAdapter.OnChangeTeamListener() {
+                @Override
+                public void change(TeamSummary teamSummary) {
+                    onAccountClickListener.acount(teamSummary);
+                }
+            });
+        }
+
 
     }
 
-    public void setAdapter(RecyclerView.Adapter adapter) {
-        listview.setAdapter(adapter);
-
+    public void setData(List<TeamSummary> list){
+        adapter.setData(list);
     }
+
 
 }

@@ -35,8 +35,7 @@ public class PopuWindowAdapter extends RecyclerView.Adapter<PopuWindowAdapter.Po
 
 
     public void setData(List<TeamSummary> teamSummaryList) {
-        list.clear();
-        list.addAll(teamSummaryList);
+        list = teamSummaryList;
         notifyDataSetChanged();
 
     }
@@ -51,12 +50,15 @@ public class PopuWindowAdapter extends RecyclerView.Adapter<PopuWindowAdapter.Po
         TeamSummary teamSummary = list.get(holder.getAdapterPosition());
          holder.teamIcon.setBackgroundResource(teamSummary.getImage());
          holder.teamName.setText(teamSummary.getName());
-         holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onChangeTeamListener.change(list.get(holder.getAdapterPosition()));
-            }
-        });
+        if (onChangeTeamListener != null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onChangeTeamListener.change(list.get(holder.getAdapterPosition()));
+                }
+            });
+        }
+
     }
 
     public interface OnChangeTeamListener {

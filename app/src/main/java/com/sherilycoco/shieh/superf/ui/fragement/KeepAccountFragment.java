@@ -73,7 +73,7 @@ public class KeepAccountFragment extends BaseFragment {
             return;
         }
 
-        list = render();
+        list = new ArrayList<>();
 //        PopuWindowAdapter adapter = new PopuWindowAdapter(list, getActivity());
 //        listPopWindow.initView(list);
 //        adapter.setOnChangeTeamListener(new PopuWindowAdapter.OnChangeTeamListener() {
@@ -87,11 +87,16 @@ public class KeepAccountFragment extends BaseFragment {
         listPopWindow.setListener(new ListPopWindow.getMyAllTeamDetialListener() {
             @Override
             public void check() {
-
+               //跳转到我的团队页面，查看所有团队的缩略信息，并可以在团队页面操作每个团队
+            }
+        });
+        listPopWindow.setOnAccountClickListener(new ListPopWindow.OnAccountClickListener() {
+            @Override
+            public void acount(TeamSummary teamSummary) {
+                //改变标题，并获取账本ID,刷新本页
             }
         });
 
-//        adapter.setData(render());
         listPopWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
         listPopWindow.showAsDropDown(changeZhangben);
         listPopWindow.setTouchable(true);
@@ -99,6 +104,7 @@ public class KeepAccountFragment extends BaseFragment {
         listPopWindow.setOutsideTouchable(true);
         listPopWindow.showAtLocation(changeZhangben, Gravity.NO_GRAVITY, 0, 0);
         listPopWindow.update();
+        listPopWindow.setData(render());
 
 
     }
