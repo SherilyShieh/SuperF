@@ -1,5 +1,6 @@
 package com.sherilycoco.shieh.superf.ui.fragement;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.Gravity;
@@ -74,6 +75,7 @@ public class KeepAccountFragment extends BaseFragment {
 
         list = render();
 //        PopuWindowAdapter adapter = new PopuWindowAdapter(list, getActivity());
+//        listPopWindow.initView(list);
 //        adapter.setOnChangeTeamListener(new PopuWindowAdapter.OnChangeTeamListener() {
 //            @Override
 //            public void change(TeamSummary teamSummary) {
@@ -81,6 +83,7 @@ public class KeepAccountFragment extends BaseFragment {
 //            }
 //        });
         listPopWindow = new ListPopWindow(getActivity(), changeZhangben.getWidth());
+        listPopWindow.initView(list);
         listPopWindow.setListener(new ListPopWindow.getMyAllTeamDetialListener() {
             @Override
             public void check() {
@@ -89,13 +92,13 @@ public class KeepAccountFragment extends BaseFragment {
         });
 
 //        adapter.setData(render());
-//        listPopWindow.setAdapter(adapter);
-        listPopWindow.initView(list);
+        listPopWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
         listPopWindow.showAsDropDown(changeZhangben);
         listPopWindow.setTouchable(true);
         listPopWindow.setFocusable(true);
         listPopWindow.setOutsideTouchable(true);
         listPopWindow.showAtLocation(changeZhangben, Gravity.NO_GRAVITY, 0, 0);
+        listPopWindow.update();
 
 
     }

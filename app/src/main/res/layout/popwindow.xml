@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bg"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
    <android.support.v7.widget.RecyclerView
-       android:background="@color/colorAccent"
+       android:layout_gravity="center"
+       tools:listitem="@layout/team_list_item_view"
+       android:layout_marginTop="10dp"
+       android:layout_marginBottom="20dp"
        android:id="@+id/listview"
        android:orientation="vertical"
        android:layout_width="match_parent"
-       android:layout_height="30dp"/>
+       android:layout_height="wrap_content"/>
     <Button
+        android:layout_margin="5dp"
         android:id="@+id/check_myteam"
         android:textSize="12sp"
         android:text="编辑我的团队"
         android:textColor="@color/white"
         android:background="@drawable/roun_line_bg"
-        android:layout_gravity="bottom"
+        android:layout_gravity="bottom|center"
         android:layout_width="match_parent"
         android:layout_height="20dp" />
-</LinearLayout>
+</FrameLayout>

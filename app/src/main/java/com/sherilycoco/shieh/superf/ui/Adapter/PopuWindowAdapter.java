@@ -71,7 +71,7 @@ public class PopuWindowAdapter extends RecyclerView.Adapter<PopuWindowAdapter.Po
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     public static class PopuViewHolder extends RecyclerView.ViewHolder {
