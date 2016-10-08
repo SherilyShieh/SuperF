@@ -26,7 +26,7 @@ allprojects{
                 umengAnalytics          :   'com.umeng.analytics:analytics:latest.integration',
                 getuiSDK                :   'com.igexin:sdk:+',
                 getuiExt                :   'com.igexin:getuiext:2.0.3',
-                glide                   :   'com.github.bumptech.glide:glide:3.6.1',
+                glide                   :   'com.github.bumptech.glide:glide:3.7.0',
                 glideTransformation     :   'jp.wasabeef:glide-transformations:1.3.1',
                 zxingCore               :   'com.google.zxing:core:3.2.1',
                 roundImageView          :   'com.makeramen:roundedimageview:2.2.1',
