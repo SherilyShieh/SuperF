@@ -37,6 +37,13 @@ android {
         javaMaxHeapSize "4g"
         preDexLibraries = false
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    sourceSets.main {
+        jniLibs.srcDir 'src/main/jniLibs'
+    }
 }
 
 task deleteUnalignedFiles(type: Delete) {
