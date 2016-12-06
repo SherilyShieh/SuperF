@@ -13,4 +13,7 @@
     <color name="grayg">#a9b7b7</color>
     <color name="line">#89e2dfdf</color>
     <color name="translucentCount">#99000000</color>
+    <color name="dividerLine">#cccccccc</color>
+    <color name="background">#fafafc</color>
+    <color name="dividerBackground">#F8F8F8</color>
 </resources>
