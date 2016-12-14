@@ -76,6 +76,7 @@ public class MainActivity extends BaseActivity implements HasComponent<MainCompo
         historyFragment = new HistoryFragment();
         personalCenterFrament = new PersonalCenterFrament();
 
+
     }
 
     @OnClick({R.id.jizhang, R.id.message, R.id.history, R.id.me})

@@ -16,4 +16,35 @@
     <color name="dividerLine">#cccccccc</color>
     <color name="background">#fafafc</color>
     <color name="dividerBackground">#F8F8F8</color>
+    <color name="colorBackground">#FEFEFE</color>
+
+    <!-- 用于分隔条-->
+    <color name="colorDivider">#edecec</color>
+    <!-- 用于块状分割，以及部分输入框底色-->
+    <color name="colorDividerLight">#F6F6F6</color>
+    <!-- 输入框提示色-->
+    <color name="textHint">#ACACAC</color>
+
+    <color name="markerTextBgColor">#AAFFFFFF</color>
+
+    <color name="buttonDisable">#DDDDDD</color>
+
+    <!--新版字体颜色-->
+    <color name="appText2">#000000</color>
+    <color name="appText">#333333</color>
+    <color name="homepageServerText1">#333639</color>
+    <color name="appText10">#666666</color>
+    <color name="appText3">#999999</color>
+    <color name="appText9">#cccccc</color>
+    <color name="appShandow">#c9c9c9</color>
+    <color name="appbgnew">#fbfbfb</color>
+    <color name="appText6">#FFFFFF</color>
+    <color name="appText4">#2E88FF</color>
+    <color name="appText5">#2A86FF</color>
+    <color name="appText7">#ff1b56</color>
+    <color name="appText8">#fe1a55</color>
+    <color name="homepageServerText2">#fd552e</color>
+    <color name="homepageServerBg1">#27b8f3</color>
+    <color name="homepageServerBg2">#f65a7e</color>
+    <color name="homepageServerBg3">#14aef5</color>
 </resources>

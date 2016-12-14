@@ -6,6 +6,7 @@ import com.sherilycoco.shieh.superf.ui.fragement.HistoryFragment;
 import com.sherilycoco.shieh.superf.ui.fragement.KeepAccountFragment;
 import com.sherilycoco.shieh.superf.ui.fragement.MessageFragment;
 import com.sherilycoco.shieh.superf.ui.fragement.PersonalCenterFrament;
+import com.sherilycoco.shieh.superf.ui.widget.footViewPager.FootViewFragment;
 
 import java.util.logging.Handler;
 
@@ -21,4 +22,5 @@ public interface MainComponent extends ActicityComponent {
     void inject(MessageFragment messageFragment);
     void inject(HistoryFragment historyFragment);
     void inject(PersonalCenterFrament personalCenterFrament);
+    void inject(FootViewFragment footViewFragment);
 }
