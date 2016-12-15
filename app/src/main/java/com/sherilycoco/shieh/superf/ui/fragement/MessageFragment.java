@@ -3,9 +3,11 @@ package com.sherilycoco.shieh.superf.ui.fragement;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.sherilycoco.shieh.superf.R;
 import com.sherilycoco.shieh.superf.di.component.MainComponent;
@@ -18,6 +20,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnTextChanged;
 
 /**
  * Created by Administrator on 2016/8/5.
@@ -25,6 +28,8 @@ import butterknife.ButterKnife;
 public class MessageFragment extends BaseFragment {
     @Bind(R.id.viewPager)
     ViewPager viewPager;
+    @Bind(R.id.pagenum)
+    EditText pagenum;
 
     private FootViewPagerAdapter footViewPagerAdapter;
     private List<String> name;
@@ -44,6 +49,11 @@ public class MessageFragment extends BaseFragment {
         name.add("王五");
         name.add("小明");
         name.add("小红");
+        name.add("小红");
+        name.add("小红");
+        name.add("小红");
+        name.add("小红");
+        name.add("小红");
         fragments = new ArrayList<>();
         first = new FootViewFragment();
         sencond = new FootViewFragment();
@@ -55,7 +65,8 @@ public class MessageFragment extends BaseFragment {
         fragments.add(third);
         fragments.add(fourth);
         fragments.add(fivth);
-        footViewPagerAdapter = new FootViewPagerAdapter(getFragmentManager(),fragments,name);
+        footViewPagerAdapter = new FootViewPagerAdapter(getFragmentManager());
+        footViewPagerAdapter.setFragments(name);
 
 
     }
@@ -73,6 +84,13 @@ public class MessageFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         viewPager.setAdapter(footViewPagerAdapter);
         viewPager.setPageMargin(20);
+    }
+
+    @OnTextChanged(R.id.pagenum)
+    public void change(){
+        if (!TextUtils.isEmpty(pagenum.getText())){
+            viewPager.setCurrentItem(Integer.valueOf(pagenum.getText().toString()));
+        }
     }
 
     @Override

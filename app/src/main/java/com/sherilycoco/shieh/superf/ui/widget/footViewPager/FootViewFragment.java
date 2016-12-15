@@ -63,6 +63,10 @@ public class FootViewFragment extends BaseFragment {
 
     private TextView scope;
     private String workersName;
+    public static FootViewFragment newInstance(){
+        FootViewFragment fragment  = new FootViewFragment();
+        return fragment;
+    }
 
     @Nullable
     @Override

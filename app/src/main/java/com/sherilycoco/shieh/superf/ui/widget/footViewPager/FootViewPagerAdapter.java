@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.sherilycoco.shieh.superf.ui.BaseFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,18 +18,30 @@ import java.util.List;
  */
 
 public class FootViewPagerAdapter extends FragmentPagerAdapter {
-    private List<FootViewFragment> fragments;
-    private List<String> name;
+    private List<FootViewFragment> fragments = new ArrayList<>();
+    private List<String> name = new ArrayList<>();
 
-    public FootViewPagerAdapter(FragmentManager fm, List<FootViewFragment> fragments,List<String> name) {
+    public FootViewPagerAdapter(FragmentManager fm/*, List<FootViewFragment> fragments*//*,List<String> name*/) {
         super(fm);
-        this.fragments = fragments;
-        this.name = name;
+    }
 
+    public void setFragments(List<String> name) {
+//        fragments = new ArrayList<>();
+        this.name = name;
+        for (int i = 0; i < name.size(); i++){
+            fragments.add(FootViewFragment.newInstance());
+        }
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
     }
 
     @Override
     public Fragment getItem(int position) {
+
         fragments.get(position).setData(name.get(position));
         return fragments.get(position);
     }

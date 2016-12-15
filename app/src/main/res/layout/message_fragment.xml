@@ -4,12 +4,25 @@
     android:clipChildren="false"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/pagenum"
+        android:hint="请输入页码"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-    <android.support.v4.view.ViewPager
-        android:layout_gravity="center"
+    <FrameLayout
         android:clipChildren="false"
-        android:id="@+id/viewPager"
-        android:layout_width="332dp"
-        android:layout_height="118dp"/>
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <android.support.v4.view.ViewPager
+            android:clipChildren="false"
+            android:id="@+id/viewPager"
+            android:layout_width="332dp"
+            android:layout_height="118dp"/>
+    </FrameLayout>
+
+
 
 </FrameLayout>
