@@ -14,6 +14,7 @@ import com.sherilycoco.shieh.superf.di.component.MainComponent;
 import com.sherilycoco.shieh.superf.ui.BaseFragment;
 import com.sherilycoco.shieh.superf.ui.widget.footViewPager.FootViewFragment;
 import com.sherilycoco.shieh.superf.ui.widget.footViewPager.FootViewPagerAdapter;
+import com.sherilycoco.shieh.superf.ui.widget.footViewPager.Person;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class MessageFragment extends BaseFragment {
     EditText pagenum;
 
     private FootViewPagerAdapter footViewPagerAdapter;
-    private List<String> name;
+    private List<Person> name;
     private FootViewFragment first;
     private FootViewFragment sencond;
     private FootViewFragment third;
@@ -44,16 +45,16 @@ public class MessageFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         name = new ArrayList<>();
-        name.add("张三");
-        name.add("李四");
-        name.add("王五");
-        name.add("小明");
-        name.add("小红");
-        name.add("小红");
-        name.add("小红");
-        name.add("小红");
-        name.add("小红");
-        name.add("小红");
+        name.add(new Person("张三",1.0f));
+        name.add(new Person("薛子谦",2.8f));
+        name.add(new Person("邓超",2.3f));
+        name.add(new Person("李倩",3.6f));
+        name.add(new Person("苏志燮",4.9f));
+        name.add(new Person("彭于晏",5.0f));
+        name.add(new Person("SB",0.0f));
+        name.add(new Person("爱新觉罗",2.2f));
+        name.add(new Person("四叔",3.7f));
+        name.add(new Person("李四",4.5f));
         fragments = new ArrayList<>();
         first = new FootViewFragment();
         sencond = new FootViewFragment();

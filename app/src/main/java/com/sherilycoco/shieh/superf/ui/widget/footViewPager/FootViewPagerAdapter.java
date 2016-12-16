@@ -19,13 +19,13 @@ import java.util.List;
 
 public class FootViewPagerAdapter extends FragmentPagerAdapter {
     private List<FootViewFragment> fragments = new ArrayList<>();
-    private List<String> name = new ArrayList<>();
+    private List<Person> name = new ArrayList<>();
 
     public FootViewPagerAdapter(FragmentManager fm/*, List<FootViewFragment> fragments*//*,List<String> name*/) {
         super(fm);
     }
 
-    public void setFragments(List<String> name) {
+    public void setFragments(List<Person> name) {
 //        fragments = new ArrayList<>();
         this.name = name;
         for (int i = 0; i < name.size(); i++){

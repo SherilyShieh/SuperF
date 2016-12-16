@@ -62,7 +62,7 @@ public class FootViewFragment extends BaseFragment {
     FrameLayout callPhone;
 
     private TextView scope;
-    private String workersName;
+    private Person workersName;
     public static FootViewFragment newInstance(){
         FootViewFragment fragment  = new FootViewFragment();
         return fragment;
@@ -80,10 +80,11 @@ public class FootViewFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        name.setText(workersName);
+        name.setText(workersName.getName());
+        ratingBar.setRating(workersName.getScope());
     }
 
-    public void setData(String nameString) {
+    public void setData(Person nameString) {
         workersName = nameString;
 //        if (!TextUtils.isEmpty(nameString))
 //            Toast.makeText(getActivity(), nameString, Toast.LENGTH_SHORT).show();

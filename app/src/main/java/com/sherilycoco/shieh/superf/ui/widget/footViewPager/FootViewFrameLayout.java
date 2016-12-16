@@ -55,7 +55,7 @@ public class FootViewFrameLayout extends FrameLayout {
         viewPager.setAdapter(footViewPagerAdapter);
         viewPager.setPageMargin(20);
     }
-    public void setData(List<String> list){
+    public void setData(List<Person> list){
         footViewPagerAdapter.setFragments(list);
     }
 
