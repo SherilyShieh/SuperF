@@ -18,10 +18,10 @@ android {
         versionName parent.ext.versionName
         multiDexEnabled true
         manifestPlaceholders = [
-                GETUI_APP_ID      : "MWJAEWMBjhAufC66FvZXQ7",
-                GETUI_APP_KEY     : "6NsRGFg6Ya5S43pw3bQPq4",
-                GETUI_APP_SECRET  : "eNyEE4vx3D7uryIAF5MD09",
-                PACKAGE_NAME      : applicationId,
+                GETUI_APP_ID    : "MWJAEWMBjhAufC66FvZXQ7",
+                GETUI_APP_KEY   : "6NsRGFg6Ya5S43pw3bQPq4",
+                GETUI_APP_SECRET: "eNyEE4vx3D7uryIAF5MD09",
+                PACKAGE_NAME    : applicationId,
         ]
     }
     buildTypes {
@@ -85,4 +85,6 @@ dependencies {
     debugCompile project(path: ':data', configuration: 'debug')
     compile project(':common')
 //    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
 }
