@@ -1,5 +1,6 @@
 package com.sherilycoco.shieh.superf.ui.fragement;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import com.sherilycoco.shieh.superf.di.component.MainComponent;
 import com.sherilycoco.shieh.superf.mvp.model.TeamSummary;
 import com.sherilycoco.shieh.superf.ui.Adapter.PopuWindowAdapter;
 import com.sherilycoco.shieh.superf.ui.BaseFragment;
+import com.sherilycoco.shieh.superf.ui.activity.DiaologDemoActivity;
 import com.sherilycoco.shieh.superf.ui.widget.ListPopWindow;
 
 import java.util.ArrayList;
@@ -62,6 +64,11 @@ public class KeepAccountFragment extends BaseFragment {
 
         ButterKnife.bind(this, view);
         return view;
+    }
+    @OnClick(R.id.month)
+    public void show(){
+        Intent intent = new Intent(getActivity(), DiaologDemoActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.change_zhangben)
