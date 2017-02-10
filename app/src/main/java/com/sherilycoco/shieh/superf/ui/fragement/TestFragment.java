@@ -3,6 +3,7 @@ package com.sherilycoco.shieh.superf.ui.fragement;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,13 +22,15 @@ import butterknife.ButterKnife;
  * Use the {@link TestFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TestFragment extends BaseFragment {
+public class TestFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     @Bind(R.id.recyclerview)
     RecyclerView recyclerview;
+    @Bind(R.id.refresh)
+    SwipeRefreshLayout refresh;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -72,11 +75,35 @@ public class TestFragment extends BaseFragment {
         MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter();
         recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerview.setAdapter(adapter);
+        recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                int topRowVerticalPosition = (recyclerView == null || recyclerView.getChildCount() == 0) ? 0 : recyclerView.getChildAt(0).getTop();
+                refresh.setEnabled(topRowVerticalPosition >= 0);//当recyclerview滑倒顶部再触发swiperefreshlayout
+
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+        });
+        refresh.setOnRefreshListener(this);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onRefresh() {
+        refresh.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                refresh.setRefreshing(false);
+            }
+        },1500);
     }
 }
