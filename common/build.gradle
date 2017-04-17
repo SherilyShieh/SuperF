@@ -1,16 +1,9 @@
-import com.android.build.gradle.LibraryPlugin
+apply plugin: 'com.android.library'
+
+//import com.android.build.gradle.LibraryPlugin
 import org.aspectj.bridge.IMessage
 import org.aspectj.bridge.MessageHandler
 import org.aspectj.tools.ajc.Main
-
-apply plugin: 'com.android.library'
-
-repositories {
-    jcenter()
-    flatDir {
-        dirs 'prebuilt-libs'
-    }
-}
 
 android {
     compileSdkVersion parent.ext.compileSdkVersion
@@ -28,7 +21,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '25.0.0'
 }
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile rootProject.ext.dependencies.androidSupportV7
@@ -39,7 +34,7 @@ dependencies {
 }
 
 android.libraryVariants.all { variant ->
-    LibraryPlugin plugin = project.plugins.getPlugin(LibraryPlugin)
+//    LibraryPlugin plugin = project.plugins.getPlugin(LibraryPlugin)
     JavaCompile javaCompile = variant.javaCompile
     javaCompile.doLast {
         String[] args = ["-showWeaveInfo",
@@ -47,9 +42,9 @@ android.libraryVariants.all { variant ->
                          "-inpath", javaCompile.destinationDir.toString(),
                          "-aspectpath", javaCompile.classpath.asPath,
                          "-d", javaCompile.destinationDir.toString(),
-                         "-classpath", javaCompile.classpath.asPath,
-                         "-bootclasspath", plugin.project.android.bootClasspath.join(
-                File.pathSeparator)]
+                         "-classpath", javaCompile.classpath.asPath
+                         /* "-bootclasspath", plugin.project.android.bootClasspath.join(
+                 File.pathSeparator)*/]
 
         MessageHandler handler = new MessageHandler(true);
         new Main().run(args, handler)
