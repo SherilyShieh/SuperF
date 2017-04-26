@@ -2,24 +2,32 @@ package com.sherilycoco.shieh.superf.ui.fragement;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sherilycoco.shieh.superf.R;
 import com.sherilycoco.shieh.superf.di.component.MainComponent;
 import com.sherilycoco.shieh.superf.mvp.model.TeamSummary;
-import com.sherilycoco.shieh.superf.ui.Adapter.PopuWindowAdapter;
 import com.sherilycoco.shieh.superf.ui.BaseFragment;
 import com.sherilycoco.shieh.superf.ui.activity.DiaologDemoActivity;
 import com.sherilycoco.shieh.superf.ui.widget.ListPopWindow;
+import com.sherilycoco.shieh.superf.ui.widget.VerifyCode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +35,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 
 /**
  * Created by Administrator on 2016/8/5.
@@ -48,6 +57,11 @@ public class KeepAccountFragment extends BaseFragment {
     LinearLayout month;
     @Bind(R.id.current_team)
     TextView currentTeam;
+    @Bind(R.id.verify_code)
+    VerifyCode verifyCode;
+    @Bind(R.id.code_input)
+    EditText codeInput;
+
 
     private ListPopWindow listPopWindow;
     private List<TeamSummary> list;
@@ -65,8 +79,41 @@ public class KeepAccountFragment extends BaseFragment {
         ButterKnife.bind(this, view);
         return view;
     }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        int length = verifyCode.getmCodeText().length();
+        InputFilter[] filters = {new InputFilter.LengthFilter(length)};
+        codeInput.setFilters(filters);
+        codeInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (codeInput.getText().toString().length() == verifyCode.getmCodeText().length()){
+                    if (TextUtils.equals(codeInput.getText().toString(),verifyCode.getmCodeText())){
+                        Toast.makeText(getActivity(), "恭喜，校验正确！", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity(), "验证码错误，请重新输入", Toast.LENGTH_SHORT).show();
+                        verifyCode.refresh();
+                    }
+                }
+
+            }
+        });
+    }
+
     @OnClick(R.id.month)
-    public void show(){
+    public void show() {
         Intent intent = new Intent(getActivity(), DiaologDemoActivity.class);
         startActivity(intent);
     }
@@ -94,7 +141,7 @@ public class KeepAccountFragment extends BaseFragment {
         listPopWindow.setListener(new ListPopWindow.getMyAllTeamDetialListener() {
             @Override
             public void check() {
-               //跳转到我的团队页面，查看所有团队的缩略信息，并可以在团队页面操作每个团队
+                //跳转到我的团队页面，查看所有团队的缩略信息，并可以在团队页面操作每个团队
             }
         });
         listPopWindow.setOnAccountClickListener(new ListPopWindow.OnAccountClickListener() {
