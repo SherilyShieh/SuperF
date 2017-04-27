@@ -100,7 +100,7 @@ public class KeepAccountFragment extends BaseFragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if (codeInput.getText().toString().length() == verifyCode.getmCodeText().length()){
-                    if (TextUtils.equals(codeInput.getText().toString(),verifyCode.getmCodeText())){
+                    if (verifyCode.isEqualsIgnoreCase(codeInput.getText().toString())){
                         Toast.makeText(getActivity(), "恭喜，校验正确！", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getActivity(), "验证码错误，请重新输入", Toast.LENGTH_SHORT).show();

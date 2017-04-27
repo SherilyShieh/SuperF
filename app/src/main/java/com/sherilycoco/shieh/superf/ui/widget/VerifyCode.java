@@ -19,7 +19,7 @@ import com.sherilycoco.shieh.superf.R;
 import java.util.Random;
 
 /**
- * Created by Administrator on 2017/4/26.
+ * Created by Sherily on 2017/4/26.
  */
 
 public class VerifyCode extends View {
