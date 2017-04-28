@@ -75,11 +75,13 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
         <LinearLayout
+            android:gravity="center"
             android:layout_margin="10dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <com.sherilycoco.shieh.superf.ui.widget.VerifyCode
+                android:layout_gravity="center"
                 verify:codeTextSize="16sp"
                 verify:codeBackground="@color/white"
                 verify:codeLength="4"
@@ -90,10 +92,10 @@
                 android:layout_width="80dp"
                 android:layout_height="40dp" />
             <EditText
+                android:layout_gravity="center"
                 android:inputType="textVisiblePassword"
                 android:id="@+id/code_input"
                 android:hint="请输入页码"
-                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
